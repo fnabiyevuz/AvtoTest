@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="page-content-wrapper py-3">
+      <div class="container">
+        <div class="card">
+          <div class="card-body">
+            <form action="/bilet/{{id}}/{{num}}" method="POST">
+              {% csrf_token %}
+              {% if question.image %}
+                <img src="{{question.image.url}}" alt="" class="mb-2">
+              {% endif %}
+              <h6>{{question.bilet.name}}.{{question.number}}.{{question.question}}</h6>
+              <input type="hidden" name="question" value="{{question.id}}">
+              <input type="hidden" name="number" value="{{question.number}}">
+              <input type="hidden" name="correct" value="{{correct}}">
+              <input type="hidden" name="incorrect" value="{{incorrect}}">
+              <div class="mb-2"></div>
+              <div class="form-check">
+                <input class="form-check-input form-check-info" type="radio" value="{{ question.optionA }}" name="answer" id="infoRadioA">
+                <label class="form-check-label" for="infoRadioA">{{ question.optionA }}</label>
+              </div>
+
+              <div class="mb-2"></div>
+              <div class="form-check">
+                <input class="form-check-input form-check-info" type="radio" value="{{ question.optionB }}" name="answer" id="infoRadioB">
+                <label class="form-check-label" for="infoRadioB">{{ question.optionB }}</label>
+              </div>
+              {% if question.optionC %}
+                <div class="mb-2"></div>
+                <div class="form-check">
+                  <input class="form-check-input form-check-info" type="radio" value="{{ question.optionC }}" name="answer" id="infoRadioC">
+                  <label class="form-check-label" for="infoRadioC">{{ question.optionC }}</label>
+                </div>
+              {% endif %}
+              {% if question.optionD %}
+                <div class="mb-2"></div>
+                <div class="form-check">
+                  <input class="form-check-input form-check-info" type="radio" value="{{ question.optionD }}" name="answer" id="infoRadioD">
+                  <label class="form-check-label" for="infoRadioD">{{ question.optionD }}</label>
+                </div>
+              {% endif %}
+              {% if question.optionE %}
+                <div class="mb-2"></div>
+                <div class="form-check">
+                  <input class="form-check-input form-check-info" type="radio" value="{{ question.optionE }}" name="answer" id="infoRadioE">
+                  <label class="form-check-label" for="infoRadioE">{{ question.optionE }}</label>
+                </div>
+              {% endif %}
+              <input type="submit" value="Keyingi" class="btn m-1 btn-primary"> <br>
+              To'g'ri : {{ correct }} | Noto'g'ri : {{ incorrect }}
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock content %}

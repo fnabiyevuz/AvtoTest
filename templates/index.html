@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="page-content-wrapper py-3">
+      <div class="container">
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert d-flex align-items-center mb-2 alert-info alert-dismissible fade show" role="alert">{{ message }}
+              <button class="btn btn-close position-relative p-1 ms-auto" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          {% endfor %}
+        {% endif %}
+        <div class="card">
+          <div class="card-body">
+            <form action="#" method="post">
+              {% csrf_token %}
+              <div class="input-group mb-3">
+                <select class="form-select" id="defaultSelect" name="bilet_id" aria-label="Default select example">
+                  {% for b in biletlar %}
+                    <option value="{{ b.id }}" {% if biletlar.first == b %} selected {% endif %}>{{ b.name }}</option>
+                  {% endfor %}
+                </select>
+                <input type="submit" class="btn btn-outline-primary" value="Boshlash" id="basic-addon2">
+                <!-- <span class="input-group-text" id="basic-addon2">@gmail.com</span> -->
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock content %}
